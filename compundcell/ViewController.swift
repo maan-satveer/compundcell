@@ -27,7 +27,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let foodName = foods![indexPath.row]
         let foodcalorie = calories![indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "food cell") as! foodTableViewCell
-       // let cell = tableview.dequeueReusableCell(withIdentifier: "for cell") as! foodTableViewCell
         cell.setName(name: foodName, calories: foodcalorie, image: foodName)
         return cell
     }
