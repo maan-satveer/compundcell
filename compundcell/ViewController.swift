@@ -12,6 +12,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var tableview: UITableView!
     var foods: [String]?
     var calories: [Int]?
+    var fooddata: [(name: String , calory: Int)]?
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return foods?.count ?? 0
     }
@@ -30,6 +31,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.setName(name: foodName, calories: foodcalorie, image: foodName)
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let foodName = fooddata![indexPath.row].name
+        let alertcontroller = UIAlertController(title: "food selected", message: "you have selected \(foodName)", preferredStyle: .actionSheet)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        let printAction = UIAlertAction(title: "Print", style: .default) { (action) in
+            print("Selected food is \(foodName)")
+        }
+        alertcontroller.addAction(okAction)
+        alertcontroller.addAction(printAction)
+        self.present(alertcontroller, animated: true, completion: nil)
+    }
     
 
     override func viewDidLoad() {
@@ -37,6 +49,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view.
         foods = ["Apple","Banana","Burger","Fries","Orange","Pizza"]
         calories = [50 , 60, 900, 300, 70,1000]
+        fooddata = [("Apple",50),("Banana",60),("Burger",900),("Pizza",700),("Fries",600),("Orange",30)]
         tableview.register(foodTableViewCell.self, forCellReuseIdentifier: "food cell")
     }
 
